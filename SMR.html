@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SeeMeRemotely.com — Remote IT Support & Micro-Apps</title>
+  <meta name="description" content="SeeMeRemotely.com provides remote IT support, micro-app development, IT logistics consulting, overhead reduction, and device setup services." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="SMR-ico.ico" sizes="any">
+  <link rel="icon" type="image/png" href="smr-sospng.png">
+  <link rel="apple-touch-icon" href="smr-sospng.png">
+
+  <!-- Social -->
+  <meta property="og:title" content="SeeMeRemotely.com — Remote IT Support & Micro-Apps" />
+  <meta property="og:description" content="Remote support, micro-apps, IT logistics consulting, overhead reduction, and device setups." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg: #070A0F;
+      --cardTop: rgba(255,255,255,.07);
+      --cardBot: rgba(255,255,255,.04);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --line: rgba(255,255,255,.14);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+
+      /* Palette pulled from your logo */
+      --smr-amber: #FEA448;
+      --smr-orange: #D27906;
+      --smr-coral: #FE7B47;
+      --smr-brown: #7E5622;
+
+      /* Pill/button ring gradient */
+      --ring: linear-gradient(90deg, var(--smr-amber), var(--smr-orange), var(--smr-coral));
+      --ringSoft: linear-gradient(90deg, rgba(254,164,72,.85), rgba(210,121,6,.85), rgba(254,123,71,.85));
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(254,164,72,.16), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(254,123,71,.12), transparent 55%),
+        radial-gradient(900px 600px at 50% 90%, rgba(210,121,6,.10), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 22px;
+    }
+
+    .wrap{
+      width: min(980px, 100%);
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 10px 2px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo{
+      width: 170px;
+      height: auto;
+      display:block;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    .brandText{
+      display:flex;
+      flex-direction:column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .brandText h1{
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.1;
+      letter-spacing: .2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tag{
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge{
+      border: 1px solid rgba(254,164,72,.28);
+      background: rgba(255,255,255,.04);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: rgba(255,255,255,.78);
+      white-space: nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+      .badge{ display:none; }
+      .brand{ flex-direction: column; align-items:flex-start; }
+      .logo{ width: 185px; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--cardTop), var(--cardBot));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .inner{
+      padding: 22px;
+      display:flex;
+      flex-direction:column;
+      gap: 16px;
+    }
+
+    .hero p{
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.6;
+      max-width: 72ch;
+    }
+
+    /* Pills with full gradient ring (wrap) */
+    .pillrow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .pill{
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 13.5px;
+      color: rgba(255,255,255,.90);
+      background:
+        linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.28)) padding-box,
+        var(--ringSoft) border-box;
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+    }
+
+    .ctaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 650;
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+
+    .btn.primary{
+      border: 1px solid transparent;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25)) padding-box,
+        var(--ring) border-box;
+    }
+
+    .btn.primary span{
+      opacity: .95;
+    }
+
+    .side h2{
+      font-size: 15px;
+      letter-spacing: .2px;
+      margin-bottom: 8px;
+    }
+
+    .kv{
+      display:grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .kv .row{
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+    }
+
+    .k{
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing:.2px;
+    }
+
+    .v{
+      font-size: 14px;
+      color: rgba(255,255,255,.88);
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .link{
+      color: rgba(255,220,190,.95);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(254,164,72,.55);
+    }
+    .link:hover{ border-bottom-color: rgba(254,164,72,.90); }
+
+    .verification{
+      border-top: 1px solid rgba(254,164,72,.18);
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+
+    .verification p{
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      padding: 10px 2px;
+      color: var(--muted);
+      font-size: 12.5px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap" role="main">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="smr-sospng.png" alt="SeeMeRemotely logo" />
+        <div class="brandText">
+          <h1>SeeMeRemotely.com</h1>
+          <div class="tag">Remote IT Support • Micro-Apps • IT Logistics Consulting</div>
+        </div>
+      </div>
+      <div class="badge">Remote support available • U.S. based</div>
+    </div>
+
+    <section class="grid">
+      <div class="card hero">
+        <div class="inner">
+          <p>
+            I provide reliable, professional remote support and practical IT services for small businesses and teams.
+            If you need help stabilizing systems, reducing overhead, setting up devices, or building small internal tools,
+            you’re in the right place.
+          </p>
+
+          <div class="pillrow" aria-label="Services">
+            <div class="pill">Remote Support (Windows / macOS)</div>
+            <div class="pill">Device Setup & Onboarding</div>
+            <div class="pill">Micro-Apps & Automations</div>
+            <div class="pill">IT Logistics Consulting</div>
+            <div class="pill">Overhead Reduction</div>
+          </div>
+
+          <div class="ctaRow" aria-label="Primary actions">
+            <a class="btn primary" href="https://898.tv/brllc" target="_blank" rel="noopener">
+              Open TeamViewer QuickSupport <span aria-hidden="true">↗</span>
+            </a>
+            <a class="btn" href="https://seemeremotely.com" target="_blank" rel="noopener">
+              Visit SeeMeRemotely.com <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="verification">
+            <p>
+              <strong>Identity & verification:</strong> This website represents the services provided under
+              <strong>SeeMeRemotely.com</strong>, offering remote IT support and related consulting and implementation work.
+              For remote sessions, clients may be directed to the TeamViewer QuickSupport link above.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card side" aria-label="Business details">
+        <div class="inner">
+          <h2>Business Details</h2>
+          <div class="kv">
+            <div class="row">
+              <div class="k">Business / Brand</div>
+              <div class="v">SeeMeRemotely.com</div>
+            </div>
+            <div class="row">
+              <div class="k">Primary Services</div>
+              <div class="v">
+                Remote support, micro-app development, IT logistics consulting,
+                overhead reduction, and device setups.
+              </div>
+            </div>
+            <div class="row">
+              <div class="k">Remote Support Link</div>
+              <div class="v">
+                <a class="link" href="https://898.tv/brllc" target="_blank" rel="noopener">https://898.tv/brllc</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="k">Contact</div>
+              <div class="v">
+                Email: <a class="link" href="mailto:support@seemeremotely.com">support@seemeremotely.com</a><br/>
+                Phone: <a class="link" href="tel:+19182009228">918-200-9228</a><br/>
+                Hours: By appointment
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px; color: var(--muted); font-size: 12.5px; line-height: 1.5;">
+            Tip: Telnyx reviews typically go smoother if your site shows a clear business identity and consistent contact info.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> SeeMeRemotely.com</div>
+      <div>Remote IT Support & Consulting</div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
