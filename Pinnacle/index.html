@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinnacle Home Design | PinnacleBoard</title>
+  <style>
+    :root {
+      --bg: #f5f1ea;
+      --panel: rgba(255,255,255,0.82);
+      --panel-strong: rgba(255,255,255,0.92);
+      --line: rgba(38, 34, 30, 0.10);
+      --text: #2d2823;
+      --muted: #6e6459;
+      --gold: #9f7b35;
+      --mine: #dcefe1;
+      --mine-line: #6ea67a;
+      --theirs: #f6ead9;
+      --theirs-line: #c9974f;
+      --hold: #f4dddd;
+      --hold-line: #c66f6f;
+      --other: #ece7df;
+      --other-line: #9d8f80;
+      --shadow: 0 12px 32px rgba(70, 54, 38, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(245, 241, 234, 0.84), rgba(245, 241, 234, 0.88)),
+        url('https://img1.wsimg.com/isteam/ip/3d24e853-442d-4c2d-b6a5-fc506c7a85a7/Pinnacle%20Home%20Design%20-%20444.jpg/:/rs=w:1360,h:700,cg:true,m/cr=w:1360,h:700,a:cc') center top / cover fixed no-repeat;
+    }
+
+    .wrap {
+      max-width: 1650px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.45fr 0.95fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .heroCard, .column {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+    }
+
+    .heroCard {
+      padding: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand img {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .heroText {
+      margin-top: 18px;
+      line-height: 1.6;
+      color: #4c4339;
+      max-width: 860px;
+      font-size: 1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    .stat .value {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr .95fr .95fr .95fr auto;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .field, .button {
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: var(--text);
+      padding: 0 14px;
+      font-size: 0.98rem;
+      outline: none;
+      box-shadow: var(--shadow);
+    }
+
+    .button {
+      cursor: pointer;
+      font-weight: 700;
+      background: linear-gradient(180deg, rgba(159,123,53,0.14), rgba(159,123,53,0.05));
+    }
+
+    .columns {
+      display: grid;
+      gap: 16px;
+      align-items: start;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .column {
+      overflow: hidden;
+    }
+
+    .columnHeader {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: .2px;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .count {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-size: .9rem;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+    }
+
+    .cards {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+      min-height: 140px;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.45);
+      border: 1px dashed var(--line);
+    }
+
+    .card {
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 8px 18px rgba(84, 66, 48, 0.10);
+      border-left: 6px solid var(--other-line);
+      background: var(--other);
+      border-top: 1px solid rgba(255,255,255,0.5);
+      border-right: 1px solid rgba(0,0,0,0.03);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .card.mine {
+      background: var(--mine);
+      border-left-color: var(--mine-line);
+    }
+
+    .card.theirs {
+      background: var(--theirs);
+      border-left-color: var(--theirs-line);
+    }
+
+    .card.hold {
+      background: var(--hold);
+      border-left-color: var(--hold-line);
+    }
+
+    .jobTop {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .jobName {
+      font-weight: 800;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    .jobNum {
+      color: var(--gold);
+      font-weight: 800;
+      white-space: nowrap;
+      font-size: 0.93rem;
+    }
+
+    .meta {
+      color: #544a40;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      display: grid;
+      gap: 4px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .badge.done { color: #305540; }
+    .badge.mine { color: #305540; background: rgba(255,255,255,0.70); }
+    .badge.theirs { color: #875313; background: rgba(255,255,255,0.70); }
+    .badge.hold { color: #8a3f3f; background: rgba(255,255,255,0.70); }
+
+    .notes {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(0,0,0,0.10);
+      color: #4c4339;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 14px;
+    }
+
+    @media (max-width: 1150px) {
+      .hero, .toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 14px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .brand img { height: 50px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="heroCard">
+        <div class="brand">
+          <img src="https://img1.wsimg.com/isteam/ip/3d24e853-442d-4c2d-b6a5-fc506c7a85a7/Pinnacle%20Home%20Design%20-%20444.jpg/:/rs=w:1360,h:700,cg:true,m/cr=w:1360,h:700,a:cc" alt="Pinnacle Home Design" />
+          <div>
+            <h1>Pinnacle Home Design</h1>
+            <p class="subtitle">Project Momentum Board</p>
+          </div>
+        </div>
+        <div class="heroText">
+          A live project board built from the published sheet so the work feels visible, organized, and motivating. Use pipeline view for momentum, or owner view to quickly see what is on us versus what is waiting on somebody else.
+        </div>
+      </div>
+      <div class="heroCard stats">
+        <div class="stat"><div class="label">Active jobs</div><div class="value" id="activeCount">0</div></div>
+        <div class="stat"><div class="label">Mine</div><div class="value" id="mineCount">0</div></div>
+        <div class="stat"><div class="label">Theirs</div><div class="value" id="theirsCount">0</div></div>
+        <div class="stat"><div class="label">On hold</div><div class="value" id="holdCount">0</div></div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <input id="searchBox" class="field" placeholder="Search by job, client, notes, or job #" />
+      <select id="ballFilter" class="field">
+        <option value="all">All ownership</option>
+        <option value="mine">Mine</option>
+        <option value="theirs">Theirs</option>
+        <option value="hold">Hold</option>
+      </select>
+      <select id="sortFilter" class="field">
+        <option value="promised">Sort: promised date</option>
+        <option value="contact">Sort: contract date</option>
+        <option value="job">Sort: job #</option>
+      </select>
+      <select id="viewFilter" class="field">
+        <option value="pipeline">Pipeline view</option>
+        <option value="owner">Mine vs theirs</option>
+      </select>
+      <button id="refreshBtn" class="button">Refresh</button>
+    </section>
+
+    <section class="columns" id="board"></section>
+
+    <div class="footer">
+      Live board connected to the published Pinnacle Home Design project sheet.
+    </div>
+  </div>
+
+  <script>
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSRJTFHXrVPl7kJoJJD-3mMHgQv9RXwWTJgQ57dXYQUijhmMq7DHA8h1QY-UxTe_EbpjG7tNWzxADgU/pub?gid=0&single=true&output=csv';
+
+    function parseDate(str) {
+      if (!str) return null;
+      const clean = String(str).trim();
+      if (!clean) return null;
+
+      const dotMatch = clean.match(/^(\d{1,2})\.(\d{1,2})\.(\d{2,4})$/);
+      if (dotMatch) {
+        const [, m, d, y] = dotMatch;
+        const yyyy = y.length === 2 ? `20${y}` : y;
+        const dt = new Date(`${yyyy}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T00:00:00`);
+        return Number.isNaN(dt.getTime()) ? null : dt;
+      }
+
+      const slashMatch = clean.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+      if (slashMatch) {
+        const [, m, d, y] = slashMatch;
+        const yyyy = y.length === 2 ? `20${y}` : y;
+        const dt = new Date(`${yyyy}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T00:00:00`);
+        return Number.isNaN(dt.getTime()) ? null : dt;
+      }
+
+      const dt = new Date(clean);
+      return Number.isNaN(dt.getTime()) ? null : dt;
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let value = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"') {
+          if (inQuotes && next === '"') {
+            value += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(value);
+          value = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') i++;
+          row.push(value);
+          if (row.some(cell => String(cell).trim() !== '')) rows.push(row);
+          row = [];
+          value = '';
+        } else {
+          value += char;
+        }
+      }
+
+      if (value.length || row.length) {
+        row.push(value);
+        if (row.some(cell => String(cell).trim() !== '')) rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function normalizeRows(rows) {
+      if (!rows.length) return [];
+
+      return rows.slice(1).flatMap(r => {
+        const left = {
+          jobName: r[0] || '',
+          jobNum: r[1] || '',
+          dateCont: r[2] || '',
+          client: r[3] || '',
+          deposit: r[4] || '',
+          brochure: r[5] || '',
+          front: r[6] || '',
+          finalPlan: r[7] || '',
+          dateProm: r[8] || '',
+          dateSent: r[9] || '',
+          owner: r[10] || '',
+          notes: r[11] || '',
+        };
+
+        const right = {
+          jobName: r[13] || '',
+          jobNum: r[14] || '',
+          dateCont: r[15] || '',
+          client: r[16] || '',
+          deposit: r[17] || '',
+          brochure: r[18] || '',
+          front: r[19] || '',
+          finalPlan: r[20] || '',
+          dateProm: r[21] || '',
+          dateSent: r[22] || '',
+          owner: r[23] || '',
+          notes: r[24] || '',
+        };
+
+        return [left, right].filter(j => j.jobName && String(j.jobName).trim() !== '');
+      });
+    }
+
+    function ownerClass(owner, notes = '') {
+      const combined = `${owner} ${notes}`.toLowerCase();
+
+      if (combined.includes('hold')) return 'hold';
+
+      if (
+        combined.includes('mine') ||
+        combined.includes('me') ||
+        combined.includes('my turn') ||
+        combined.includes('us') ||
+        combined.includes('office')
+      ) return 'mine';
+
+      if (
+        combined.includes('their') ||
+        combined.includes('them') ||
+        combined.includes('client') ||
+        combined.includes('city') ||
+        combined.includes('county') ||
+        combined.includes('builder') ||
+        combined.includes('engineer') ||
+        combined.includes('hoa') ||
+        combined.includes('permit') ||
+        combined.includes('review') ||
+        combined.includes('waiting') ||
+        combined.includes('approval')
+      ) return 'theirs';
+
+      return '';
+    }
+
+    function getStage(job) {
+      const notes = (job.notes || '').toLowerCase();
+      const owner = ownerClass(job.owner, job.notes);
+      if (owner === 'hold' || notes.includes('hold')) return 'Hold';
+      if ((job.finalPlan || '').trim().toUpperCase() === 'X') return 'Final Plan';
+      if ((job.front || '').trim().toUpperCase() === 'X') return 'Front Elevation';
+      if ((job.brochure || '').trim().toUpperCase() === 'X') return 'Brochure';
+      if ((job.deposit || '').trim().toUpperCase() === 'X') return 'Deposit / Intake';
+      return 'New / Unstarted';
+    }
+
+    function formatDate(str) {
+      const dt = parseDate(str);
+      return dt ? dt.toLocaleDateString() : (str || '—');
+    }
+
+    function sortJobs(items, mode) {
+      return [...items].sort((a, b) => {
+        if (mode === 'job') {
+          return String(a.jobNum).localeCompare(String(b.jobNum), undefined, { numeric: true, sensitivity: 'base' });
+        }
+
+        const da = parseDate(mode === 'contact' ? a.dateCont : a.dateProm);
+        const db = parseDate(mode === 'contact' ? b.dateCont : b.dateProm);
+
+        if (!da && !db) return 0;
+        if (!da) return 1;
+        if (!db) return -1;
+        return da - db;
+      });
+    }
+
+    function card(job) {
+      const owner = ownerClass(job.owner, job.notes);
+      const flags = [];
+
+      if ((job.deposit || '').trim().toUpperCase() === 'X') flags.push('<span class="badge done">Deposit</span>');
+      if ((job.brochure || '').trim().toUpperCase() === 'X') flags.push('<span class="badge done">Brochure</span>');
+      if ((job.front || '').trim().toUpperCase() === 'X') flags.push('<span class="badge done">Front</span>');
+      if ((job.finalPlan || '').trim().toUpperCase() === 'X') flags.push('<span class="badge done">Final</span>');
+      if (job.owner) flags.push(`<span class="badge ${owner || ''}">${job.owner}</span>`);
+      if (job.notes) flags.push(`<span class="badge ${owner || ''}">${job.notes}</span>`);
+
+      return `
+        <article class="card ${owner || ''}">
+          <div class="jobTop">
+            <div class="jobName">${job.jobName || 'Untitled Job'}</div>
+            <div class="jobNum">${job.jobNum || ''}</div>
+          </div>
+          <div class="meta">
+            <div><strong>Client:</strong> ${job.client || '—'}</div>
+            <div><strong>Contract:</strong> ${formatDate(job.dateCont)}</div>
+            <div><strong>Promised:</strong> ${formatDate(job.dateProm)}</div>
+            <div><strong>Sent:</strong> ${formatDate(job.dateSent)}</div>
+          </div>
+          <div class="badges">${flags.join('')}</div>
+        </article>
+      `;
+    }
+
+    function renderBoard(items) {
+      const board = document.getElementById('board');
+      const view = document.getElementById('viewFilter').value;
+      const columns = view === 'owner'
+        ? ['Mine', 'Theirs', 'Hold', 'Other']
+        : ['New / Unstarted', 'Deposit / Intake', 'Brochure', 'Front Elevation', 'Final Plan', 'Hold'];
+
+      board.innerHTML = columns.map(col => {
+        const subset = items.filter(job => {
+          const owner = ownerClass(job.owner, job.notes);
+
+          if (view === 'owner') {
+            if (col === 'Mine') return owner === 'mine';
+            if (col === 'Theirs') return owner === 'theirs';
+            if (col === 'Hold') return owner === 'hold';
+            return !owner;
+          }
+
+          return getStage(job) === col;
+        });
+
+        return `
+          <section class="column">
+            <div class="columnHeader">${col}<span class="count">${subset.length}</span></div>
+            <div class="cards">${subset.length ? subset.map(card).join('') : '<div class="empty">No jobs here.</div>'}</div>
+          </section>
+        `;
+      }).join('');
+    }
+
+    let rawJobs = [];
+
+    function applyFilters() {
+      const q = document.getElementById('searchBox').value.toLowerCase().trim();
+      const ball = document.getElementById('ballFilter').value;
+      const sort = document.getElementById('sortFilter').value;
+
+      let items = rawJobs.filter(job => {
+        const hay = [job.jobName, job.jobNum, job.client, job.notes, job.owner].join(' ').toLowerCase();
+        const owner = ownerClass(job.owner, job.notes);
+        const matchQ = !q || hay.includes(q);
+        const matchBall = ball === 'all' || owner === ball;
+        return matchQ && matchBall;
+      });
+
+      items = sortJobs(items, sort);
+      renderBoard(items);
+
+      document.getElementById('activeCount').textContent = rawJobs.length;
+      document.getElementById('mineCount').textContent = rawJobs.filter(j => ownerClass(j.owner, j.notes) === 'mine').length;
+      document.getElementById('theirsCount').textContent = rawJobs.filter(j => ownerClass(j.owner, j.notes) === 'theirs').length;
+      document.getElementById('holdCount').textContent = rawJobs.filter(j => ownerClass(j.owner, j.notes) === 'hold').length;
+    }
+
+    async function loadData() {
+      const res = await fetch(CSV_URL + (CSV_URL.includes('?') ? '&' : '?') + 't=' + Date.now());
+      const text = await res.text();
+      rawJobs = normalizeRows(parseCSV(text));
+      applyFilters();
+    }
+
+    document.getElementById('searchBox').addEventListener('input', applyFilters);
+    document.getElementById('ballFilter').addEventListener('change', applyFilters);
+    document.getElementById('sortFilter').addEventListener('change', applyFilters);
+    document.getElementById('viewFilter').addEventListener('change', applyFilters);
+    document.getElementById('refreshBtn').addEventListener('click', loadData);
+
+    loadData();
+    setInterval(loadData, 120000);
+  </script>
+</body>
+</html>
